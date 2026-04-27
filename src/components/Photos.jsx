@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import './Photos.css';
 
+// Resolve to the deployed base path so images work at both / (Vercel)
+// and /my-portfolio/ (GitHub Pages).
+const BASE = import.meta.env.BASE_URL;
+
 const PHOTOS = [
-  { src: '/images/snapshots/photo-1.jpg', caption: '2025 春' },
-  { src: '/images/snapshots/photo-2.jpg', caption: '临沧的风' },
-  { src: '/images/snapshots/photo-3.jpg', caption: 'Claude Code' },
-  { src: '/images/snapshots/photo-4.jpg', caption: '随手拍' },
-  { src: '/images/snapshots/photo-5.jpg', caption: '某个下午' },
+  { src: `${BASE}images/snapshots/photo-1.jpg`, caption: '2025 春' },
+  { src: `${BASE}images/snapshots/photo-2.jpg`, caption: '临沧的风' },
+  { src: `${BASE}images/snapshots/photo-3.jpg`, caption: 'Claude Code' },
+  { src: `${BASE}images/snapshots/photo-4.jpg`, caption: '随手拍' },
+  { src: `${BASE}images/snapshots/photo-5.jpg`, caption: '某个下午' },
 ];
 
 // Hand-tuned placements — looks "scattered" but stable across reloads

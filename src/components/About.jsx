@@ -45,7 +45,7 @@ export default function About() {
               handle="chenyang"
               status="求职中"
               contactText="联系我"
-              avatarUrl="/images/avatar.jpg?v=3"
+              avatarUrl={`${import.meta.env.BASE_URL}images/avatar.jpg?v=3`}
               enableTilt={true}
               enableMobileTilt={false}
               behindGlowEnabled={true}
