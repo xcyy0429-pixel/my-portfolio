@@ -1,0 +1,195 @@
+.profile-card {
+  position: relative;
+  width: min(420px, 100%);
+  height: 600px;
+  border-radius: 22px;
+  transform-style: preserve-3d;
+  transition: transform 200ms ease;
+  will-change: transform;
+}
+
+.profile-card--glow::before {
+  content: '';
+  position: absolute;
+  inset: -26px;
+  border-radius: 28px;
+  background: radial-gradient(
+    60% 55% at 50% 35%,
+    var(--pc-glow, rgba(127, 119, 221, 0.6)),
+    rgba(0, 0, 0, 0) 65%
+  );
+  filter: blur(18px);
+  opacity: 0.9;
+  transform: translateZ(-1px);
+  pointer-events: none;
+}
+
+.profile-card__glare {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  background: radial-gradient(
+    120% 80% at 35% 20%,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.05) 45%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.profile-card__inner {
+  position: relative;
+  border-radius: 22px;
+  height: 600px;
+  padding: 16px;
+  background: var(
+    --pc-inner,
+    linear-gradient(145deg, #26215c8c 0%, #afa9ec44 100%)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-card__avatar {
+  width: 420px;
+  max-width: 100%;
+  height: 520px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.profile-card__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-card__avatar-fallback {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.16),
+    rgba(255, 255, 255, 0.04)
+  );
+}
+
+.profile-card__meta {
+  margin-top: 12px;
+  min-width: 0;
+}
+
+.profile-card__name-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.profile-card__contact-line {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-card__email {
+  margin-top: 6px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.84);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.profile-card__status {
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.86);
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  flex: 0 0 auto;
+}
+
+.profile-card__title {
+  margin-top: 6px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.4;
+}
+
+.profile-card__handle {
+  margin-top: 8px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.profile-card__actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.profile-card__contact {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.22);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition:
+    transform 120ms ease,
+    background 120ms ease,
+    border-color 120ms ease;
+}
+
+.profile-card__contact:hover {
+  background: rgba(0, 0, 0, 0.28);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.profile-card__contact:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 900px) {
+  .profile-card {
+    width: min(520px, 100%);
+    height: 600px;
+  }
+
+  .profile-card__avatar {
+    width: 100%;
+    height: min(520px, 52vh);
+  }
+}
+

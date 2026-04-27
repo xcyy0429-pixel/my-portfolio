@@ -1,0 +1,381 @@
+.experience {
+  --exp-bg: var(--color-bg-cream);
+  --exp-line: rgba(10, 10, 10, 0.16);
+  --exp-line-soft: rgba(10, 10, 10, 0.08);
+  --exp-text: #0a0a0a;
+
+  width: 100%;
+  background: var(--exp-bg);
+  color: var(--exp-text);
+  padding: 160px 40px 200px;
+}
+
+/* Header */
+.experience__header {
+  max-width: 1200px;
+  margin: 0 auto 100px;
+  text-align: center;
+}
+
+.experience__eyebrow {
+  font-family: var(--font-caveat);
+  font-size: 26.4px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(10, 10, 10, 0.55);
+  margin: 0 0 28px;
+}
+
+.experience__heading {
+  font-family: var(--font-caveat);
+  font-weight: 600;
+  font-size: clamp(56px, 7vw, 96px); /* original 48–84 × 1.1 ≈ 53–92 */
+  line-height: 1.02;
+  letter-spacing: -0.005em;
+  margin: 0 0 24px;
+}
+
+.experience__heading em {
+  font-style: normal; /* Caveat is already script — italic would render as ugly oblique */
+}
+
+.experience__sub {
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(10, 10, 10, 0.6);
+  margin: 0;
+}
+
+/* Timeline container */
+.experience__timeline {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 40px;
+}
+
+/* Vertical track running through the dots */
+.experience__track {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--exp-line) 5%,
+    var(--exp-line) 95%,
+    transparent
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Grid: left-card | left-connector | dot column | right-connector | right-card */
+.experience__nodes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 48px 24px 48px 1fr;
+  row-gap: 56px;
+  position: relative;
+  z-index: 1;
+}
+
+/* <li> only carries CSS variables — its children become real grid items */
+.exp-node {
+  display: contents;
+}
+
+.exp-node > * {
+  grid-row: var(--row);
+  align-self: center;
+}
+
+/* Left variant: card col 1, line col 2, dot col 3 */
+.exp-node--left .exp-node__card {
+  grid-column: 1;
+  justify-self: end;
+}
+.exp-node--left .exp-node__line {
+  grid-column: 2;
+  justify-self: stretch;
+}
+.exp-node--left .exp-node__dot {
+  grid-column: 3;
+  justify-self: center;
+}
+
+/* Right variant: dot col 3, line col 4, card col 5 */
+.exp-node--right .exp-node__dot {
+  grid-column: 3;
+  justify-self: center;
+}
+.exp-node--right .exp-node__line {
+  grid-column: 4;
+  justify-self: stretch;
+}
+.exp-node--right .exp-node__card {
+  grid-column: 5;
+  justify-self: start;
+}
+
+/* Horizontal connector line from card edge to dot */
+.exp-node__line {
+  height: 1px;
+  width: 100%;
+  background: var(--exp-line);
+  transition: background 0.4s ease;
+}
+
+/* Dot */
+.exp-node__dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #0a0a0a;
+  box-shadow: 0 0 0 4px var(--exp-bg);
+  transition: transform 0.4s ease, background 0.4s ease;
+  z-index: 2;
+}
+
+.exp-node.is-active .exp-node__dot {
+  transform: scale(1.35);
+}
+
+.exp-node.is-active .exp-node__line {
+  background: rgba(10, 10, 10, 0.4);
+}
+
+/* Card (button reset) */
+.exp-node__card {
+  appearance: none;
+  -webkit-appearance: none;
+  background: #ffffff;
+  border: 1px solid var(--exp-line-soft);
+  border-radius: 14px;
+  padding: 18px 22px;
+  width: 240px;
+  font: inherit;
+  color: var(--exp-text);
+  text-align: left;
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+  transition:
+    width 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.4s ease;
+}
+
+.exp-node__card:hover {
+  border-color: rgba(10, 10, 10, 0.18);
+  transform: translateY(-2px);
+}
+
+.exp-node.is-active .exp-node__card {
+  width: 340px;
+  border-color: rgba(10, 10, 10, 0.22);
+  box-shadow: 0 24px 60px -28px rgba(10, 10, 10, 0.28);
+  transform: translateY(0);
+}
+
+/* Compact (always visible) */
+.exp-node__compact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.exp-node__period {
+  font-family: var(--font-caveat);
+  font-size: 18px; /* dates dominate — ~16 × 1.1 */
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: rgba(10, 10, 10, 0.55);
+}
+
+.exp-node__company {
+  font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'Noto Sans SC', system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--exp-text);
+}
+
+/* Expanded content — grid-template-rows trick for smooth height transition */
+.exp-node__expand {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.exp-node.is-active .exp-node__expand {
+  grid-template-rows: 1fr;
+}
+
+.exp-node__expand-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.exp-node__role {
+  margin: 18px 0 14px;
+  padding-top: 16px;
+  border-top: 1px solid var(--exp-line-soft);
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--exp-text);
+}
+
+.exp-node__points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exp-node__points li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(10, 10, 10, 0.7);
+}
+
+.exp-node__points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 1px;
+  background: rgba(10, 10, 10, 0.45);
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal--up {
+  transform: translateY(28px);
+}
+
+.experience.is-visible .reveal {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.experience.is-visible .reveal--delay-1 {
+  transition-delay: 0.12s;
+}
+.experience.is-visible .reveal--delay-2 {
+  transition-delay: 0.24s;
+}
+.experience.is-visible .reveal--delay-3 {
+  transition-delay: 0.36s;
+}
+
+/* ── Responsive: stack vertically on small screens ───────────────────── */
+@media (max-width: 900px) {
+  .experience {
+    padding: 100px 24px 120px;
+  }
+
+  .experience__header {
+    margin-bottom: 60px;
+  }
+
+  .experience__timeline {
+    padding: 0;
+  }
+
+  .experience__track {
+    display: none;
+  }
+
+  .experience__nodes {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-left: 28px;
+    position: relative;
+    grid-template-columns: none;
+    grid-template-rows: none;
+  }
+
+  .experience__nodes::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 14px;
+    bottom: 14px;
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--exp-line) 4%,
+      var(--exp-line) 96%,
+      transparent
+    );
+  }
+
+  /* Reset desktop grid display: contents on <li> */
+  .exp-node {
+    display: block;
+    width: 100%;
+    position: relative;
+  }
+
+  .exp-node > * {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .exp-node__line {
+    display: none;
+  }
+
+  .exp-node__dot {
+    position: absolute;
+    left: -28px;
+    top: 26px;
+    margin: 0;
+  }
+
+  .exp-node__card,
+  .exp-node.is-active .exp-node__card {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .exp-node__card,
+  .exp-node__expand,
+  .exp-node__line,
+  .exp-node__dot {
+    transition: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

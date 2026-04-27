@@ -1,0 +1,123 @@
+.footer {
+  --footer-text: #ffffff;
+  --footer-text-muted: rgba(255, 255, 255, 0.55);
+
+  width: 100%;
+  background: #060818;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+  padding: 48px 0 36px;
+}
+
+.footer__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Row 1 — greeting */
+.footer__greeting {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui,
+    sans-serif;
+  font-size: 20px;
+  color: var(--footer-text-muted);
+  margin: 0 0 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.02em;
+}
+
+.footer__star {
+  color: #afa9ec;
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* Row 2 — contacts */
+.footer__contacts {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.contact-item {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 4px 8px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  transition: transform 0.2s ease;
+}
+
+.contact-item:hover {
+  transform: translateY(-3px);
+}
+
+.contact-item__value {
+  font-family: var(--font-handwrite);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--footer-text);
+  letter-spacing: 0.01em;
+  transition: color 0.25s ease;
+}
+
+.contact-item__value.is-copied {
+  color: #7ed59a;
+}
+
+.contact-item__label {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui,
+    sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--footer-text-muted);
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+/* Row 3 — meta */
+.footer__meta {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui,
+    sans-serif;
+  font-size: 18px;
+  color: var(--footer-text-muted);
+  margin: 0 0 28px;
+  line-height: 1.6;
+  max-width: 90%;
+}
+
+/* Copyright */
+.footer__copyright {
+  font-family: var(--font-handwrite);
+  font-weight: 400;
+  font-size: 17px;
+  color: var(--footer-text-muted);
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+/* Responsive — stack contacts vertically on small screens */
+@media (max-width: 600px) {
+  .footer__contacts {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

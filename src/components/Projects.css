@@ -1,0 +1,375 @@
+.projects {
+  --proj-text: #0a0a0a;
+  --proj-muted: rgba(10, 10, 10, 0.6);
+  --proj-soft: rgba(10, 10, 10, 0.45);
+  --proj-body: rgba(10, 10, 10, 0.72);
+  --proj-accent: #4f7cff;
+  --proj-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  width: 100%;
+  background: var(--color-bg-cream);
+  color: var(--proj-text);
+  padding: 160px 40px 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Header — matches About / Experience / Photos typographic system */
+.projects__header {
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  text-align: center;
+}
+
+.projects__eyebrow {
+  font-family: var(--font-caveat);
+  font-size: 26.4px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(10, 10, 10, 0.55);
+  margin: 0 0 28px;
+}
+
+.projects__heading {
+  font-family: var(--font-caveat);
+  font-weight: 600;
+  font-size: clamp(56px, 7vw, 96px);
+  line-height: 1.02;
+  letter-spacing: -0.005em;
+  color: var(--proj-text);
+  margin: 0 0 24px;
+}
+
+.projects__heading em {
+  font-style: normal;
+}
+
+.projects__sub {
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(10, 10, 10, 0.6);
+  margin: 0;
+}
+
+/* Timeline container */
+.projects__timeline {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 0 80px;
+  min-height: 560px;
+}
+
+/* Wave background */
+.projects__wave {
+  position: absolute;
+  inset: 40px 0 80px;
+  width: 100%;
+  height: calc(100% - 120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.projects__wave-stroke {
+  fill: none;
+  stroke: url(#waveGradient);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 2200;
+  stroke-dashoffset: 2200;
+  transition: stroke-dashoffset 1.8s var(--proj-ease) 0.2s;
+}
+
+.projects__wave-glow {
+  fill: none;
+  stroke: rgba(120, 160, 255, 0.28);
+  stroke-width: 8;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 1.4s ease 0.4s;
+}
+
+.projects.is-visible .projects__wave-stroke {
+  stroke-dashoffset: 0;
+}
+
+.projects.is-visible .projects__wave-glow {
+  opacity: 1;
+}
+
+/* Cards row */
+.projects__cards {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: nowrap;
+}
+
+/* Card */
+.project-card {
+  width: 280px;
+  height: 420px;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 28px;
+  padding: 32px 28px;
+
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.5),
+    0 8px 30px rgba(31, 38, 135, 0.08),
+    0 0 20px rgba(120, 160, 255, 0.08);
+
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.9s var(--proj-ease) var(--delay, 0s),
+    transform 0.9s var(--proj-ease) var(--delay, 0s),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* Stagger — odd higher, even lower (1↑ 2↓ 3↑ 4↓) */
+.project-card:nth-child(odd) {
+  margin-top: 0;
+}
+
+.project-card:nth-child(even) {
+  margin-top: 80px;
+}
+
+/* Reveal */
+.projects.is-visible .project-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.7),
+    0 18px 50px rgba(31, 38, 135, 0.16),
+    0 0 40px rgba(120, 160, 255, 0.28);
+}
+
+/* Icon */
+.project-card__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--proj-accent);
+  margin-bottom: 24px;
+
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.4)),
+    radial-gradient(circle at 30% 30%, rgba(120, 160, 255, 0.25), rgba(180, 200, 255, 0.06));
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 4px 14px rgba(120, 160, 255, 0.18);
+  transition: transform 0.45s var(--proj-ease), box-shadow 0.45s var(--proj-ease);
+}
+
+.project-card__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.project-card:hover .project-card__icon {
+  transform: scale(1.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 6px 22px rgba(120, 160, 255, 0.32);
+}
+
+/* Title — Chinese name with Barlow / CN fallback (matches Experience) */
+.project-card__title {
+  font-family: 'Barlow', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'Noto Sans SC', system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: var(--proj-text);
+  margin: 0 0 8px;
+}
+
+/* Period — Caveat (matches eyebrow / Experience date style) */
+.project-card__period {
+  font-family: var(--font-caveat);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: rgba(10, 10, 10, 0.55);
+  margin-bottom: 18px;
+}
+
+/* Description — Barlow body */
+.project-card__desc {
+  font-family: 'Barlow', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+  font-weight: 300;
+  color: var(--proj-body);
+  margin: 0 0 20px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Tag pills — Barlow (matches About / Experience tags) */
+.project-card__tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.project-card__tags li {
+  font-family: 'Barlow', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(10, 10, 10, 0.72);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  padding: 6px 14px;
+  white-space: nowrap;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.project-card:hover .project-card__tags li {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--proj-accent);
+}
+
+/* Header reveal animation (shared pattern) */
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal--up {
+  transform: translateY(28px);
+}
+
+.projects.is-visible .reveal {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.projects.is-visible .reveal--delay-1 {
+  transition-delay: 0.12s;
+}
+.projects.is-visible .reveal--delay-2 {
+  transition-delay: 0.24s;
+}
+.projects.is-visible .reveal--delay-3 {
+  transition-delay: 0.36s;
+}
+
+/* Tight desktops (1366 / 1280×800 laptops): keep 4 in a row, just trim padding */
+@media (max-width: 1320px) {
+  .projects {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .projects__cards {
+    gap: 16px;
+  }
+}
+
+/* Below ~1180px the 4 cards genuinely don't fit — wrap to grid */
+@media (max-width: 1180px) {
+  .projects__timeline {
+    min-height: 0;
+    padding: 20px 0 40px;
+  }
+
+  .projects__cards {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+  }
+
+  .project-card,
+  .project-card:nth-child(odd),
+  .project-card:nth-child(even) {
+    margin-top: 0;
+  }
+
+  .projects__wave {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects {
+    padding: 100px 20px 120px;
+  }
+
+  .projects__header {
+    margin-bottom: 56px;
+  }
+
+  .project-card {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    min-height: 380px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .project-card,
+  .project-card__icon,
+  .projects__wave-stroke,
+  .projects__wave-glow {
+    transition: none !important;
+    animation: none !important;
+  }
+  .reveal,
+  .project-card {
+    opacity: 1;
+    transform: none;
+  }
+  .projects__wave-stroke {
+    stroke-dashoffset: 0;
+  }
+  .projects__wave-glow {
+    opacity: 1;
+  }
+}
